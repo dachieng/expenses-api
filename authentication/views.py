@@ -25,5 +25,7 @@ class UserRegistration(ListCreateAPIView):
 
             user = User.objects.get(email=user_data['email'])
 
+            token = RefreshToken.for_user(user)
+
             return Response(user_data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
